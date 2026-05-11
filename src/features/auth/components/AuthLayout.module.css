@@ -1,0 +1,210 @@
+.layoutContainer {
+  background-color: var(--background, #131313);
+  color: var(--on-surface, #e5e2e1);
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.leftPane {
+  display: none;
+  width: 50%;
+  position: relative;
+  background-color: var(--surface-container-lowest, #0e0e0e);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
+  overflow: hidden;
+  border-right: 1px solid rgba(65, 71, 84, 0.2);
+}
+
+@media (min-width: 768px) {
+  .leftPane {
+    display: flex;
+  }
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  mix-blend-mode: luminosity;
+  opacity: 0.4;
+  background-size: cover;
+  background-position: center;
+  transition: transform 20s linear;
+  transform: scale(1.05);
+}
+
+.bgImage:hover {
+  transform: scale(1);
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--background) 40%, transparent), color-mix(in srgb, var(--background) 80%, transparent), var(--background));
+}
+
+.brandHeader {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--primary, #a9c7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(169, 199, 255, 0.2);
+}
+
+.logoIcon span {
+  color: var(--on-primary, #003063);
+  font-size: 24px;
+}
+
+.brandName {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.taglineBox {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 3rem;
+  background-color: color-mix(in srgb, var(--surface-container) 60%, transparent);
+  backdrop-filter: blur(24px);
+  border: 1px solid color-mix(in srgb, var(--outline) 30%, transparent);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 28rem;
+  display: inline-block;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+}
+
+.taglineTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.taglineDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--on-surface-variant, #c0c6d6);
+  line-height: 1.5;
+}
+
+.systemStatus {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--secondary, #40e56c);
+  box-shadow: 0 0 8px var(--secondary, #40e56c);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.statusText {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--on-surface-variant, #c0c6d6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.rightPane {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--surface, #131313);
+  position: relative;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .rightPane {
+    width: 50%;
+    padding: 2rem 6rem;
+  }
+}
+
+.rightPaneBgDeco {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 500px;
+  background-color: rgba(169, 199, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  transform: translate(25%, -50%);
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  z-index: 10;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .mobileHeader {
+    display: none;
+  }
+}
+
+.mobileLogoIcon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary, #a9c7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileLogoIcon span {
+  color: var(--on-primary, #003063);
+  font-size: 18px;
+}
