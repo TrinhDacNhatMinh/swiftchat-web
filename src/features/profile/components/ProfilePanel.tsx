@@ -48,7 +48,7 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
     enabled: !!normalizedHandle && isOpen
   });
 
-  const user = userResponse?.data;
+  const user = userResponse as any;
 
 
   const isOnline = usePresenceStore(s => s.onlineUsers.has(user?.id ?? ''));
