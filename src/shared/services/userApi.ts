@@ -9,8 +9,6 @@ export interface UpdateProfileDto {
   avatarUrl?: string;
   coverUrl?: string;
   bio?: string;
-  website?: string;
-  location?: string;
 }
 
 export interface ChangePasswordDto {

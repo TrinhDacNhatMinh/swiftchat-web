@@ -17,8 +17,6 @@ export interface User {
   createdAt?: string;
   lastSeen?: string | null;
   bio?: string | null;
-  website?: string | null;
-  location?: string | null;
   coverUrl?: string | null;
 }
 

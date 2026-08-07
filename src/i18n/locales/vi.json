@@ -99,8 +99,6 @@
     "handle": "Handle",
     "bio": "Tiểu sử",
     "bioPlaceholder": "Giới thiệu bản thân...",
-    "location": "Vị trí",
-    "website": "Trang web",
     "saveProfile": "Lưu hồ sơ",
     "profileUpdated": "Cập nhật hồ sơ thành công",
     "profileUpdateFailed": "Không thể cập nhật hồ sơ. Tên người dùng có thể đã tồn tại.",

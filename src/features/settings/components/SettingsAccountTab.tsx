@@ -24,8 +24,6 @@ const profileSchema = z.object({
   displayName: z.string().min(2, 'Display name is too short').max(50, 'Display name is too long'),
   handle: z.string().min(3, 'Handle is too short').max(30, 'Handle is too long').regex(/^[a-zA-Z0-9_]+$/, 'Handle can only contain letters, numbers, and underscores'),
   bio: z.string().max(160, 'Bio is too long').optional(),
-  location: z.string().max(30, 'Location is too long').optional(),
-  website: z.string().url('Invalid URL').optional().or(z.literal('')),
 });
 
 type ProfileFormData = z.infer<typeof profileSchema>;
@@ -73,8 +71,6 @@ export function SettingsAccountTab() {
       displayName: user?.displayName || '',
       handle: user?.handle || '',
       bio: user?.bio || '',
-      location: user?.location || '',
-      website: user?.website || '',
     }
   });
 
@@ -98,8 +94,6 @@ export function SettingsAccountTab() {
     if (data.displayName !== user?.displayName) payload.displayName = data.displayName;
     if (data.handle !== user?.handle) payload.handle = data.handle;
     if (data.bio !== (user?.bio || '')) payload.bio = data.bio || undefined;
-    if (data.location !== (user?.location || '')) payload.location = data.location || undefined;
-    if (data.website !== (user?.website || '')) payload.website = data.website || undefined;
 
     if (Object.keys(payload).length === 0) {
       toast({ message: t('settings.profileUpdated', 'Cập nhật hồ sơ thành công'), type: 'success' });
@@ -184,27 +178,6 @@ export function SettingsAccountTab() {
               placeholder={t('settings.bioPlaceholder', 'Giới thiệu bản thân...')}
             />
           </FormField>
-
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              label={t('settings.location', 'Vị trí')}
-              error={profileErrors.location?.message}
-            >
-              <div className="relative">
-                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant/40">location_on</span>
-                <input {...registerProfile('location')} className={`${inputCls} pl-10`} placeholder="Hà Nội, Việt Nam" />
-              </div>
-            </FormField>
-            <FormField
-              label={t('settings.website', 'Trang web')}
-              error={profileErrors.website?.message}
-            >
-              <div className="relative">
-                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant/40">link</span>
-                <input {...registerProfile('website')} className={`${inputCls} pl-10`} placeholder="https://" />
-              </div>
-            </FormField>
-          </div>
 
           <div className="flex justify-end pt-2">
             <button

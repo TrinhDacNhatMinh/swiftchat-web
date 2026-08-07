@@ -261,20 +261,6 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
             )}
 
             <div className="flex flex-wrap gap-x-5 gap-y-3 mt-6 text-[13px] text-on-surface-variant w-full">
-              {user.location && (
-                <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[18px] opacity-70">location_on</span>
-                  <span>{user.location}</span>
-                </div>
-              )}
-              {user.website && (
-                <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[18px] opacity-70">link</span>
-                  <a href={user.website} target="_blank" rel="noreferrer" className="text-on-surface hover:underline truncate max-w-[150px]">
-                    {user.website.replace(/^https?:\/\//, '')}
-                  </a>
-                </div>
-              )}
               <div className="flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-[18px] opacity-70">calendar_month</span>
                 <span>

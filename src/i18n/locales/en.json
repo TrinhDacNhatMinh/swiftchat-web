@@ -99,8 +99,6 @@
     "handle": "Handle",
     "bio": "Bio",
     "bioPlaceholder": "Tell us about yourself...",
-    "location": "Location",
-    "website": "Website",
     "saveProfile": "Save Profile",
     "profileUpdated": "Profile updated successfully",
     "profileUpdateFailed": "Failed to update profile. Handle might be taken.",
