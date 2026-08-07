@@ -235,7 +235,10 @@
     "userUnavailable": "Người dùng không thể liên hệ",
     "noConversations": "Không có cuộc trò chuyện nào",
     "noConversationsFound": "Không tìm thấy cuộc trò chuyện nào phù hợp với tìm kiếm của bạn.",
-    "noConversationsDesc": "Bắt đầu một cuộc trò chuyện mới để kết nối với bạn bè."
+    "noConversationsDesc": "Bắt đầu một cuộc trò chuyện mới để kết nối với bạn bè.",
+    "noMessagesYet": "Chưa có tin nhắn",
+    "messageUnsentItem": "✕ Đã thu hồi",
+    "attachmentItem": "📎 Đính kèm"
   },
   "common": {
     "featureInDevelopment": "Tính năng \"{{feature}}\" đang được phát triển!",

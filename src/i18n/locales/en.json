@@ -217,7 +217,6 @@
     "viewAll": "View all",
     "disbandGroup": "Disband Group",
     "disbandGroupConfirm": "Are you sure you want to disband this group? All members will be removed and messages will be permanently deleted.",
-    "addMembers": "Add members",
     "blockUser": "Block user",
     "unblockUser": "Unblock",
     "blockConfirm": "Are you sure you want to block this user? They will no longer be able to send you messages.",
@@ -233,7 +232,10 @@
     "userUnavailable": "User is unavailable",
     "noConversations": "No conversations",
     "noConversationsFound": "No conversations found matching your search.",
-    "noConversationsDesc": "Start a new conversation to connect with your friends."
+    "noConversationsDesc": "Start a new conversation to connect with your friends.",
+    "noMessagesYet": "No messages yet",
+    "messageUnsentItem": "✕ Unsent",
+    "attachmentItem": "📎 Attachment"
   },
   "common": {
     "featureInDevelopment": "Feature \"{{feature}}\" is under development!",
