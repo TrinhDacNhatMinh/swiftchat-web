@@ -154,7 +154,18 @@ export function MessageList({
           Footer: () => (
             <div className="py-2 px-6">
               {/* Typing Indicator */}
-              {typingUsers.length > 0 && <TypingIndicator users={typingUsers} />}
+              {typingUsers.length > 0 && (
+                <TypingIndicator 
+                  users={typingUsers.map(u => {
+                    const sender = senderMap.get(u.userId);
+                    return {
+                      ...u,
+                      handle: sender?.name || u.handle,
+                      avatarUrl: sender?.avatarUrl || undefined
+                    };
+                  })} 
+                />
+              )}
             </div>
           )
         }}
