@@ -72,9 +72,14 @@ export function ConversationItem({ conversation, isActive, onClick, onContextMen
         </div>
         <p className={`text-[14px] truncate leading-snug ${isUnread ? 'text-on-surface font-bold' : 'text-on-surface-variant/70 font-normal'}`}>
           {conversation.lastMessage ? (
-            conversation.lastMessage.isUnsent ? t('chat.messageUnsentItem', '✕ Đã thu hồi') :
-            conversation.lastMessage.attachments?.length ? t('chat.attachmentItem', '📎 Đính kèm') :
-            conversation.lastMessage.content
+            <>
+              {conversation.lastMessage.senderId === user?.id && (
+                <span className="text-on-surface-variant/50">{t('common.you', 'You')}: </span>
+              )}
+              {conversation.lastMessage.isUnsent ? t('chat.messageUnsentItem', '✕ Đã thu hồi') :
+              conversation.lastMessage.attachments?.length ? t('chat.attachmentItem', '📎 Đính kèm') :
+              conversation.lastMessage.content}
+            </>
           ) : (
             t('chat.noMessagesYet', 'Chưa có tin nhắn')
           )}
