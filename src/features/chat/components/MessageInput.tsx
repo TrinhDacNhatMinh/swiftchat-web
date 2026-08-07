@@ -25,6 +25,7 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
   const typingTimeoutRef = useRef<NodeJS.Timeout>(undefined);
   const isTypingRef = useRef(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     return () => {
@@ -54,6 +55,8 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
     setPreviewUrl(null);
     setPreviewFile(null);
     onCancelReply?.();
+    // Restore focus so user can continue typing immediately after sending
+    setTimeout(() => inputRef.current?.focus(), 0);
   };
 
   const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,7 +142,7 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
         </div>
       )}
       {/* Attachment + Form */}
-      <div className="p-4 pt-3">
+      <div className="px-6 pt-3 pb-4">
       {/* Attachment preview */}
       {previewFile && (
         <div className="relative inline-block mb-3 ml-1">
@@ -171,7 +174,7 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="relative flex items-center gap-2 max-w-4xl mx-auto w-full">
+      <form onSubmit={handleSubmit} className="relative flex items-center gap-2 w-full">
         {/* Hidden file input */}
         <input
           ref={fileInputRef}
@@ -194,6 +197,7 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
         {/* Input Field */}
         <div className="flex-1 relative group w-full">
           <input
+            ref={inputRef}
             value={content}
             onChange={handleTyping}
             onKeyDown={(e) => {
