@@ -274,7 +274,8 @@
     "blockFailed": "Failed to block user.",
     "joined": "Joined {{date}}",
     "editProfileHint1": "To change your personal information,",
-    "editProfileHint2": "please visit the <strong>Settings</strong> section."
+    "editProfileHint2": "please visit the <strong>Settings</strong> section.",
+    "noBio": "No bio yet"
   },
   "errors": {
     "400": "Invalid input data.",

@@ -277,7 +277,8 @@
     "unblockSuccess": "Đã bỏ chặn người dùng.",
     "blockSuccess": "Đã chặn người dùng.",
     "unblockFailed": "Không thể bỏ chặn.",
-    "blockFailed": "Không thể chặn."
+    "blockFailed": "Không thể chặn.",
+    "noBio": "Chưa có tiểu sử"
   },
   "errors": {
     "400": "Dữ liệu đầu vào không hợp lệ.",
