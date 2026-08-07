@@ -181,7 +181,7 @@ export function SettingsAccountTab() {
               {...registerProfile('bio')}
               rows={3}
               className={`${inputCls} resize-none`}
-              placeholder="Giới thiệu bản thân..."
+              placeholder={t('settings.bioPlaceholder', 'Giới thiệu bản thân...')}
             />
           </FormField>
 

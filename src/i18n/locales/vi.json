@@ -98,6 +98,7 @@
     "displayName": "Tên hiển thị",
     "handle": "Handle",
     "bio": "Tiểu sử",
+    "bioPlaceholder": "Giới thiệu bản thân...",
     "location": "Vị trí",
     "website": "Trang web",
     "saveProfile": "Lưu hồ sơ",
@@ -233,7 +234,10 @@
     "uploadFailed": "Tải file thất bại. Vui lòng thử lại.",
     "moreActions": "Thêm hành động",
     "messageNotFound": "Không tìm thấy tin nhắn này.",
-    "userUnavailable": "Người dùng không thể liên hệ"
+    "userUnavailable": "Người dùng không thể liên hệ",
+    "noConversations": "Không có cuộc trò chuyện nào",
+    "noConversationsFound": "Không tìm thấy cuộc trò chuyện nào phù hợp với tìm kiếm của bạn.",
+    "noConversationsDesc": "Bắt đầu một cuộc trò chuyện mới để kết nối với bạn bè."
   },
   "common": {
     "featureInDevelopment": "Tính năng \"{{feature}}\" đang được phát triển!",

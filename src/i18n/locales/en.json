@@ -98,6 +98,7 @@
     "displayName": "Display Name",
     "handle": "Handle",
     "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
     "location": "Location",
     "website": "Website",
     "saveProfile": "Save Profile",
@@ -231,7 +232,10 @@
     "replyPlaceholder": "Type a reply...",
     "messagePlaceholder": "Message...",
     "attachment": "📎 Attachment",
-    "userUnavailable": "User is unavailable"
+    "userUnavailable": "User is unavailable",
+    "noConversations": "No conversations",
+    "noConversationsFound": "No conversations found matching your search.",
+    "noConversationsDesc": "Start a new conversation to connect with your friends."
   },
   "common": {
     "featureInDevelopment": "Feature \"{{feature}}\" is under development!",
