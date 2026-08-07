@@ -26,11 +26,9 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
   const currentUser = useAuthStore(state => state.user);
   const isMe = currentUser?.handle === normalizedHandle;
   
-  const [isEditing, setIsEditing] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    setIsEditing(false);
     setIsMenuOpen(false);
   }, [handle]);
 
@@ -132,48 +130,38 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
 
   return renderModal(
     <>
-      <div className="h-[68px] px-5 border-b border-outline-variant/30 flex items-center justify-between shrink-0 bg-surface/80 backdrop-blur-md absolute top-0 w-full z-20">
-        <h2 className="font-headline-sm font-semibold text-on-surface">
-            {isEditing ? t('profile.edit', 'Chỉnh sửa hồ sơ') : t('profile.title', 'Hồ sơ người dùng')}
-          </h2>
-          <button 
-            onClick={closeProfile}
-            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors text-on-surface-variant"
-          >
-            <span className="material-symbols-outlined text-[24px]">close</span>
-          </button>
+      <div className="absolute top-4 right-5 z-20">
+        <button 
+          onClick={closeProfile}
+          className="w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md flex items-center justify-center transition-colors text-white shadow-sm"
+        >
+          <span className="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+      
+      <div className="flex-1 overflow-y-auto bg-surface-container-lowest pb-10">
+        <div className="h-[200px] sm:h-[240px] w-full relative shrink-0">
+          {user.coverUrl ? (
+            <img src={user.coverUrl} alt="Cover" className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-surface-variant" />
+          )}
         </div>
-        
-        <div className="flex-1 overflow-y-auto bg-surface-container-lowest pt-[68px]">
-          <div className="h-48 w-full relative shrink-0">
-            {user.coverUrl ? (
-              <img src={user.coverUrl} alt="Cover" className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full bg-gradient-to-tr from-primary/20 via-secondary/20 to-tertiary/20" />
+
+          <div className="relative px-6 sm:px-8 flex justify-between items-end mb-4 -mt-16 sm:-mt-20 shrink-0">
+          <div className="relative z-10">
+            <UserAvatar 
+              user={user as any} 
+              size="2xl" 
+              className="!w-[120px] !h-[120px] sm:!w-[140px] sm:!h-[140px] border-[5px] border-surface-container-lowest bg-surface-container-high shadow-sm" 
+            />
+            {isOnline && (
+              <span className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-5 h-5 sm:w-6 sm:h-6 bg-secondary border-[3px] border-surface-container-lowest rounded-full z-10 shadow-sm" />
             )}
           </div>
-
-          <div className="relative px-8 flex justify-between items-end mb-5 -mt-16 shrink-0">
-            <div className="relative z-10">
-              <UserAvatar 
-                user={user as any} 
-                size="2xl" 
-                className="!w-32 !h-32 border-[6px] border-surface-container-lowest bg-surface-container-high shadow-sm" 
-              />
-              {isOnline && (
-                <span className="absolute bottom-2 right-2 w-6 h-6 bg-secondary border-[4px] border-surface-container-lowest rounded-full z-10 shadow-sm" />
-              )}
-            </div>
             
             <div className="pb-2 flex items-center gap-2">
-              {isMe ? (
-                <button 
-                  onClick={() => setIsEditing(!isEditing)} 
-                  className="px-5 py-2 rounded-full border border-outline text-on-surface hover:bg-surface-variant transition-colors text-sm font-semibold shadow-sm"
-                >
-                  {isEditing ? t('common.cancel', 'Hủy') : t('profile.edit', 'Sửa')}
-                </button>
-              ) : (
+              {!isMe && (
                 <>
                   {status === 'friends' && (
                     <button 
@@ -244,21 +232,21 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
             </div>
           </div>
 
-          <div className="px-8 flex flex-col items-start text-left w-full mb-8">
-            <h1 className="text-3xl font-bold text-on-surface leading-tight tracking-tight">
-              {user.displayName || user.handle}
-            </h1>
-            <p className="text-on-surface-variant/80 text-[17px] font-medium mt-1">@{user.handle}</p>
+          <div className="px-6 sm:px-8 flex flex-col items-start text-left w-full mt-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-on-surface leading-tight tracking-tight">
+            {user.displayName || user.handle}
+          </h1>
+          <p className="text-on-surface-variant/70 text-[15px] sm:text-[16px] font-medium mt-0.5">@{user.handle}</p>
 
-            {user.bio ? (
-              <p className="mt-4 text-on-surface text-sm leading-relaxed whitespace-pre-wrap">
-                {user.bio}
-              </p>
-            ) : (
-              <p className="mt-4 text-on-surface-variant/60 italic text-sm">
-                {t('profile.noBio', 'Chưa có tiểu sử')}
-              </p>
-            )}
+          {user.bio ? (
+            <p className="mt-5 text-on-surface text-[15px] leading-relaxed whitespace-pre-wrap">
+              {user.bio}
+            </p>
+          ) : (
+            <p className="mt-5 text-on-surface-variant/50 italic text-[15px]">
+              {t('profile.noBio', 'Chưa có tiểu sử')}
+            </p>
+          )}
 
             <div className="flex flex-wrap gap-x-5 gap-y-3 mt-6 text-[13px] text-on-surface-variant w-full">
               <div className="flex items-center gap-1.5">
@@ -269,16 +257,6 @@ export function ProfilePanel({ onStartChat }: ProfilePanelProps) {
               </div>
             </div>
           </div>
-
-          {isEditing && isMe && (
-            <div className="px-8 pb-8 animate-in fade-in slide-in-from-top-4 duration-300">
-              <div className="bg-surface-container rounded-2xl p-5 border border-outline-variant text-sm text-on-surface-variant flex flex-col items-center justify-center gap-2">
-                <span className="material-symbols-outlined text-[32px] opacity-50 mb-1">settings</span>
-                <p>{t('profile.editProfileHint1', 'Để chỉnh sửa hồ sơ chi tiết')}</p>
-                <p dangerouslySetInnerHTML={{ __html: t('profile.editProfileHint2', 'Vui lòng truy cập phần <b>Cài đặt &gt; Tài khoản</b>') }}></p>
-              </div>
-            </div>
-          )}
         </div>
     </>
   );
