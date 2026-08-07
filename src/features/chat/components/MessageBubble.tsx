@@ -232,6 +232,9 @@ export const MessageBubble: FC<MessageBubbleProps> = memo(({ message, sender, co
                 <div 
                   className="flex items-center absolute -bottom-3 right-2 z-10 bg-surface-container-high border border-outline-variant shadow-sm rounded-full px-1.5 py-0.5 cursor-pointer hover:bg-surface-container-highest transition-colors"
                   title={t('chat.viewReactions', 'Xem danh sách người thả cảm xúc')}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onPointerUp={(e) => e.stopPropagation()}
                 >
                   <div className="flex -space-x-1 items-center">
                     {displayEmojis.map((emoji: string, idx: number) => (
