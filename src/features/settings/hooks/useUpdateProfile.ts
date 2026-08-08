@@ -20,6 +20,9 @@ export const useUpdateProfile = () => {
       // Invalidate relevant queries
       queryClient.invalidateQueries({ queryKey: ['users', 'me'] });
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
+      if (user?.handle) {
+        queryClient.invalidateQueries({ queryKey: ['profile', user.handle] });
+      }
     },
   });
 };
