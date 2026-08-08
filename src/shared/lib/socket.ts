@@ -69,12 +69,12 @@ class AgentSocket {
     this.ws?.off(event, handler);
   }
 
-  emit(event: string, data?: any) {
-    if (import.meta.env.DEV) console.log(`[Socket] Emit: ${event}`, data);
+  emit(event: string, ...args: any[]) {
+    if (import.meta.env.DEV) console.log(`[Socket] Emit: ${event}`, args);
     if (!this.ws?.connected) {
       if (import.meta.env.DEV) console.warn('[Socket] Cannot emit - not connected!');
     }
-    this.ws?.emit(event, data);
+    this.ws?.emit(event, ...args);
   }
 }
 

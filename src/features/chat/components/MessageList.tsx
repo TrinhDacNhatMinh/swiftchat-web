@@ -127,6 +127,7 @@ export function MessageList({
       <Virtuoso
         ref={virtuosoRef}
         data={messages}
+        context={{ readReceipts, senderMap }}
         firstItemIndex={VIRTUOSO_INITIAL_INDEX - messages.length} // Trick to keep scroll position when prepending items
         initialTopMostItemIndex={messages.length - 1}
         startReached={loadMore}
@@ -169,9 +170,9 @@ export function MessageList({
             </div>
           )
         }}
-        itemContent={(index, msg) => {
+        itemContent={(index, msg, context) => {
           const senderId = msg.senderId;
-          const sender = senderId ? senderMap.get(senderId) : undefined;
+          const sender = senderId ? context.senderMap.get(senderId) : undefined;
           
           // Original index in the messages array (adjusting for firstItemIndex offset)
           const actualIndex = messages.indexOf(msg);
@@ -208,7 +209,8 @@ export function MessageList({
           
           const hideName = prevSenderId === senderId && !showTimeSeparator;
 
-          const msgReceipts = readReceipts.filter(r => r.lastReadMessageId === msg.id && r.accountId !== msg.senderId);
+          const msgReceipts = context.readReceipts.filter((r: ReadReceipt) => r.lastReadMessageId === msg.id && r.accountId !== msg.senderId);
+          const isLastInChat = actualIndex === messages.length - 1;
 
           return (
             <div className="flex flex-col px-6">
@@ -229,6 +231,7 @@ export function MessageList({
                   hideAvatar={hideAvatar}
                   hideName={hideName}
                   readReceipts={msgReceipts}
+                  isLastInChat={isLastInChat}
                 />
               </div>
             </div>

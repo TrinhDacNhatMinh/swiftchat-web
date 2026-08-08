@@ -33,15 +33,26 @@ export const useReadReceipts = (conversationId: string | null) => {
       if (data.conversationId !== conversationId) return;
       
       queryClient.setQueryData(['readReceipts', conversationId], (old: any) => {
-        if (!old || !old.data) return old;
+        if (!old || !Array.isArray(old)) return old;
         
-        const newReceipts = old.data.map((receipt: ReadReceipt) => 
-          receipt.accountId === data.accountId 
-            ? { ...receipt, lastReadMessageId: data.messageId }
-            : receipt
-        );
+        let found = false;
+        const newReceipts = old.map((receipt: ReadReceipt) => {
+          if (receipt.accountId === data.accountId) {
+            found = true;
+            return { ...receipt, lastReadMessageId: data.messageId };
+          }
+          return receipt;
+        });
 
-        return { ...old, data: newReceipts };
+        if (!found) {
+          newReceipts.push({
+            accountId: data.accountId,
+            lastReadMessageId: data.messageId,
+            account: { id: data.accountId, lastSeen: null, profile: null }
+          });
+        }
+
+        return newReceipts;
       });
     };
 

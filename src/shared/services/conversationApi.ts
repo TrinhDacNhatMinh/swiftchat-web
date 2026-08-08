@@ -75,7 +75,7 @@ export const conversationApi = {
   },
 
   getReadReceipts: async (id: string) => {
-    const response = await axiosInstance.get<ApiResponse<any[]>>(`/conversations/${id}/read-receipts`);
+    const response = await axiosInstance.get<any[]>(`/conversations/${id}/read-receipts`);
     return response.data;
   },
 };

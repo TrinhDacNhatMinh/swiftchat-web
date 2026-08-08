@@ -291,5 +291,12 @@
   },
   "upload": {
     "changeAvatar": "Change Avatar"
+  },
+  "status": {
+    "online": "Active now",
+    "offline": "Offline",
+    "sending": "Sending...",
+    "sent": "Sent",
+    "seen": "Seen"
   }
 }

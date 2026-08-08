@@ -148,7 +148,7 @@ export function MessageThread({ conversationId }: MessageThreadProps) {
             typingUsers={typingUsers}
             setReplyTo={setReplyTo}
             scrollRef={scrollRef}
-            readReceipts={readReceiptsData?.data || []}
+            readReceipts={readReceiptsData || []}
             targetMessageId={jumpToMessageId}
           />
           

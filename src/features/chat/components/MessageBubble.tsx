@@ -18,13 +18,14 @@ interface MessageBubbleProps {
   hideAvatar?: boolean;
   hideName?: boolean;
   readReceipts?: ReadReceipt[];
+  isLastInChat?: boolean;
 }
 
 const isImageUrl = (url: string) => {
   return /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(url);
 };
 
-export const MessageBubble: FC<MessageBubbleProps> = memo(({ message, sender, conversationId, onReply, hideAvatar, hideName, readReceipts }) => {
+export const MessageBubble: FC<MessageBubbleProps> = memo(({ message, sender, conversationId, onReply, hideAvatar, hideName, readReceipts, isLastInChat }) => {
   const user = useAuthStore((s) => s.user);
   const { t } = useTranslation();
 
@@ -185,9 +186,6 @@ export const MessageBubble: FC<MessageBubbleProps> = memo(({ message, sender, co
                 } ${isSending ? 'opacity-50' : ''}`}
               >
                 {message.content}
-                {isSending && (
-                  <span className="absolute bottom-1 right-2 text-[10px] opacity-50">{t('chat.sending', 'Đang gửi...')}</span>
-                )}
               </div>
             )}
 
@@ -266,23 +264,37 @@ export const MessageBubble: FC<MessageBubbleProps> = memo(({ message, sender, co
           )}
         </div>
 
-        {/* Read Receipts */}
-        {isMine && readReceipts && readReceipts.length > 0 && (
-          <div className="flex items-center gap-1 mt-0.5 justify-end">
-            <div className="flex -space-x-1.5">
-              {readReceipts.map(receipt => (
-                <div key={receipt.accountId} className="w-3.5 h-3.5 rounded-full border border-background bg-surface-container-high overflow-hidden z-10" title={receipt.account?.profile?.displayName || 'Đã xem'}>
-                  {receipt.account?.profile?.avatarUrl ? (
-                    <img src={receipt.account.profile.avatarUrl} alt="avatar" className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[7px] font-bold">
-                      {(receipt.account?.profile?.displayName || 'U').charAt(0).toUpperCase()}
+        {/* Status Indicator (Sending, Sent, Seen) */}
+        {isMine && (
+          <div className="flex items-center justify-end mt-0.5 h-4 empty:hidden">
+            {isSending ? (
+              <div className="flex items-center gap-1 opacity-70">
+                <span className="material-symbols-outlined text-[13px]">radio_button_unchecked</span>
+                <span className="text-[10px] font-medium">{t('status.sending', 'Đang gửi...')}</span>
+              </div>
+            ) : readReceipts && readReceipts.length > 0 ? (
+              <div className="flex items-center gap-1">
+                <div className="flex -space-x-1.5">
+                  {readReceipts.map(receipt => (
+                    <div key={receipt.accountId} className="w-3.5 h-3.5 rounded-full border border-background bg-surface-container-high overflow-hidden z-10" title={receipt.account?.profile?.displayName || 'Đã xem'}>
+                      {receipt.account?.profile?.avatarUrl ? (
+                        <img src={receipt.account.profile.avatarUrl} alt="avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[7px] font-bold">
+                          {(receipt.account?.profile?.displayName || 'U').charAt(0).toUpperCase()}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  ))}
                 </div>
-              ))}
-            </div>
-            <span className="text-[10px] text-on-surface-variant opacity-60 ml-0.5">{t('status.seen', 'Đã xem')}</span>
+                <span className="text-[10px] text-on-surface-variant opacity-70 ml-0.5">{t('status.seen', 'Đã xem')}</span>
+              </div>
+            ) : isLastInChat ? (
+              <div className="flex items-center gap-1 opacity-70">
+                <span className="material-symbols-outlined text-[13px]">check_circle</span>
+                <span className="text-[10px] font-medium">{t('status.sent', 'Đã gửi')}</span>
+              </div>
+            ) : null}
           </div>
         )}
 

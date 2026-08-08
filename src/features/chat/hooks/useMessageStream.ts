@@ -62,11 +62,11 @@ export const useMessageStream = (conversationId: string | null) => {
 
     const handleReadReceipt = (data: {
       conversationId: string;
-      userId: string;
+      accountId: string;
       messageId: string;
       timestamp: string;
     }) => {
-      if (data.userId === useAuthStore.getState().user?.id) return;
+      if (data.accountId === useAuthStore.getState().user?.id) return;
 
       queryClient.setQueryData<InfiniteData<Message>>(
         queryKeys.messages(data.conversationId),

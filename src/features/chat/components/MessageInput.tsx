@@ -35,13 +35,15 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if ((!content.trim() && !pendingAttachment) || isPending || uploadingFile) return;
+    if ((!content.trim() && !pendingAttachment) || uploadingFile) return;
+
+    const clientTempId = `temp_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
 
     sendMessage({
       conversationId,
       content: content.trim() || '',
       type: pendingAttachment ? attachmentType : 'text',
-      clientTempId: `temp_${Date.now()}`,
+      clientTempId,
       ...(pendingAttachment ? { attachments: [pendingAttachment] } : {}),
       ...(replyTo ? { replyToMessageId: replyTo.id } : {}),
     });
@@ -209,7 +211,8 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
             className="w-full bg-surface-container border border-outline-variant/50 rounded-full py-2.5 px-5 pr-12 text-on-surface text-[15px] focus:outline-none focus:border-primary focus:bg-surface transition-all placeholder:text-on-surface-variant shadow-sm"
             placeholder={replyTo ? t('chat.replyPlaceholder', 'Nhập tin nhắn trả lời...') : t('chat.messagePlaceholder', 'Message...')}
             type="text"
-            disabled={isPending}
+            // We intentionally don't disable the input during isPending so users can type the next message immediately
+            disabled={uploadingFile}
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
             <button type="button" className="w-8 h-8 rounded-full hover:bg-surface-bright flex items-center justify-center text-on-surface-variant transition-colors">
@@ -221,7 +224,7 @@ export function MessageInput({ conversationId, replyTo, onCancelReply }: Message
         {/* Send button */}
         <button
           type="submit"
-          disabled={!canSend || isPending}
+          disabled={!canSend}
           className="w-10 h-10 rounded-full bg-on-surface text-surface flex items-center justify-center hover:opacity-80 active:scale-95 transition-all shrink-0 disabled:opacity-30 disabled:cursor-not-allowed shadow-sm"
         >
           <span className="material-symbols-outlined text-[20px] fill">send</span>
